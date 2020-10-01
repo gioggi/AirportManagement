@@ -75,4 +75,4 @@ production:
   <<: *default
   database: am__production
   username: postgres
-  password: <%= ENV['UNTITLED1_DATABASE_PASSWORD'] %>
+  password: <%= ENV['AM_DATABASE_PASSWORD'] %>

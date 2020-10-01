@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :airport do
-    name {Faker::Movies::LordOfTheRings.character }
+    name { Faker::Movies::LordOfTheRings.character }
     city { Faker::Movies::LordOfTheRings.location }
   end
 end

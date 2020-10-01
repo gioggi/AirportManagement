@@ -5,7 +5,7 @@ class CreateSeats < ActiveRecord::Migration[6.0]
       t.datetime :booking_date
       t.float :price
       t.belongs_to :flight
-      t.belongs_to :passenger, :optional => true
+      t.belongs_to :passenger, optional: true
       t.timestamps
     end
   end

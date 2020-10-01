@@ -4,7 +4,7 @@ class CreatePassengers < ActiveRecord::Migration[6.0]
       t.string :first_name
       t.string :last_name
       t.string :passport
-      t.boolean :on_board, :null => false, :default =>  true
+      t.boolean :on_board, null: false, default: true
       t.belongs_to :user
       t.timestamps
     end
