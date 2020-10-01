@@ -1,6 +1,10 @@
 class FlightsController < ApplicationController
 
   def index
-    render json: Flight.all.to_json, status: :ok
+    @flights = Flight.active_flights
+  end
+
+  def show
+    @flight = Flight.find(params[:id])
   end
 end

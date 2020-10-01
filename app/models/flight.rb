@@ -23,7 +23,9 @@ class Flight < ApplicationRecord
     Flight.all.map{|f| [f.number, f.id]}
   end
 
-
+  def self.active_flights
+    Flight.all.where('departure_time > ? ',DateTime.now)
+  end
   private
 
   def seats_numbers_valid?
