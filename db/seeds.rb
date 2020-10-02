@@ -14,6 +14,7 @@ if Rails.env.development?
       last_name: Faker::Name.last_name,
       language: 'it',
       time_zone: 'UCT',
-      currency: 'USD'
+      currency: 'USD',
+      admin: true
   )
 end

@@ -1,7 +1,9 @@
 class Flight < ApplicationRecord
+
   belongs_to :airplane
   belongs_to :departure_airport, class_name: 'Airport'
   belongs_to :arrival_airport, class_name: 'Airport'
+  has_one :flight_execution
   has_many :seats
 
   validates :number, :arrival_time, :departure_time, presence: true
@@ -11,6 +13,52 @@ class Flight < ApplicationRecord
 
   before_validation :create_seats
 
+  include AASM
+
+  aasm do
+    state :scheduled, initial: true
+    state :gate
+    state :departed
+    state :in_air
+    state :landed
+    state :arrived
+    state :cancelled
+
+    event :boarding do
+      transitions from: :scheduled, to: :gate, guard: :airplane_to_ground?
+    end
+    event :depart, after_commit: :start_flight_execution do
+      transitions from: :gate, to: :departed, guard: :airplane_to_ground?
+    end
+
+    event :start do
+      transitions from: :departed, to: :in_air, guard: :airplane_in_air?
+    end
+
+    event :landing do
+      transitions from: :in_air, to: :landed, guard: :airplane_to_ground?
+    end
+
+    event :finish_flight do
+      transitions from: :landed, to: :arrived, guard: :airplane_to_ground?
+    end
+
+    event :cancel do
+      transitions from: :scheduled, to: :cancelled
+    end
+  end
+
+  def start_flight_execution
+    FlightExecution.create(departure_time: DateTime.now, flight: self)
+  end
+
+  def airplane_to_ground?
+    airplane.ground?
+  end
+
+  def airplane_in_air?
+    airplane.in_air?
+  end
   def get_flight_before
     Flight.where('airplane_id = ? and departure_time <= ?', airplane.id, arrival_time).order(:arrival_time).limit(1)
   end

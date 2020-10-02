@@ -115,12 +115,10 @@ RSpec.describe Flight, type: :model do
     end
   end
 
+  # context 'Valid state:' do
+  # end
+
+
   # context 'Valid time_zone:' do
-  #   it "only a tzinfo zone is valid" do
-  #     expect(build(:user, time_zone: 'UTC')).to be_valid
-  #   end
-  #   it "other is invalid" do
-  #     expect(build(:user, time_zone: 'US/Centrl')).to_not be_valid
-  #   end
   # end
 end

@@ -46,3 +46,6 @@ gem 'cancancan'
 gem 'devise'
 
 gem 'jbuilder'
+gem 'rails-controller-testing'
+gem 'simple_token_authentication', '~> 1.0'
+gem 'aasm'

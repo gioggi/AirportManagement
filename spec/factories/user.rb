@@ -7,5 +7,8 @@ FactoryBot.define do
     language { 'it' }
     time_zone { 'UCT' }
     currency { 'USD' }
+    email { Faker::Internet.email }
+    password { 'password' }
+    password_confirmation { 'password'  }
   end
 end

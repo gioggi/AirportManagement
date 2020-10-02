@@ -16,7 +16,6 @@ class FlightValidator < ActiveModel::Validator
       # to do refactor
       previous_flight = record.get_flight_before.first
       next_flight = record.get_flight_after.first
-      byebug
       if previous_flight
         if next_flight
           if record.arrival_time < next_flight.departure_time

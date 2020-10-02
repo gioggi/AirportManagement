@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_01_125857) do
+ActiveRecord::Schema.define(version: 2020_10_01_230538) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 2020_10_01_125857) do
     t.bigint "airport_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "aasm_state"
     t.index ["airport_id"], name: "index_airplanes_on_airport_id"
   end
 
@@ -52,6 +53,7 @@ ActiveRecord::Schema.define(version: 2020_10_01_125857) do
     t.bigint "flight_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "aasm_state"
     t.index ["flight_id"], name: "index_flight_executions_on_flight_id"
   end
 
@@ -64,6 +66,7 @@ ActiveRecord::Schema.define(version: 2020_10_01_125857) do
     t.bigint "airplane_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "aasm_state"
     t.index ["airplane_id"], name: "index_flights_on_airplane_id"
     t.index ["arrival_airport_id"], name: "index_flights_on_arrival_airport_id"
     t.index ["departure_airport_id"], name: "index_flights_on_departure_airport_id"
@@ -105,8 +108,9 @@ ActiveRecord::Schema.define(version: 2020_10_01_125857) do
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.string "authentication_token", limit: 30
+    t.boolean "admin", default: false, null: false
+    t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
   end
 
   add_foreign_key "flights", "airports", column: "arrival_airport_id"
