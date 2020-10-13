@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Airplane < ApplicationRecord
   belongs_to :airport, optional: true
   validates :name, :n_number, :seats_numbers, presence: true

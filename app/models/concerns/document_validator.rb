@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DocumentValidator < ActiveModel::Validator
   def validate(record)
     if record.on_board

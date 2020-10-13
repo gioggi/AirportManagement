@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register Seat do
   permit_params :number, :booking_date, :price, :flight_id, :passenger_id
 

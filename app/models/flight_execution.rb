@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FlightExecution < ApplicationRecord
   belongs_to :flight
   has_one :airplane, through: :flight

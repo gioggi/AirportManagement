@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # spec/factories.rb
 
 FactoryBot.define do
@@ -8,8 +10,6 @@ FactoryBot.define do
     departure_airport { create(:airport) }
     arrival_airport { create(:airport) }
     airplane { create(:airplane) }
-    after(:create) do |flight|
-      flight.reload
-    end
+    after(:create, &:reload)
   end
 end

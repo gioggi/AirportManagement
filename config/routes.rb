@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   ActiveAdmin::Devise.config[:controllers][:sessions] = 'admin/sessions'
   devise_for :users, ActiveAdmin::Devise.config
