@@ -118,7 +118,6 @@ RSpec.describe Flight, type: :model do
   # context 'Valid state:' do
   # end
 
-
   # context 'Valid time_zone:' do
   # end
 end

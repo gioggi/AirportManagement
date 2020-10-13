@@ -9,6 +9,6 @@ FactoryBot.define do
     currency { 'USD' }
     email { Faker::Internet.email }
     password { 'password' }
-    password_confirmation { 'password'  }
+    password_confirmation { 'password' }
   end
 end

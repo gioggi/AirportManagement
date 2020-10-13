@@ -1,3 +1,3 @@
 class Airport < ApplicationRecord
-  validates_presence_of :name, :city
+  validates :name, :city, presence: true
 end

@@ -1,5 +1,6 @@
-class Flight < ApplicationRecord
+# frozen_string_literal: true
 
+class Flight < ApplicationRecord
   belongs_to :airplane
   belongs_to :departure_airport, class_name: 'Airport'
   belongs_to :arrival_airport, class_name: 'Airport'
@@ -10,6 +11,8 @@ class Flight < ApplicationRecord
   validates :number, uniqueness: true
   validates_with FlightValidator
   validate :seats_numbers_valid?
+
+  scope :active, -> { where('departure_time > ? ', DateTime.now) }
 
   before_validation :create_seats
 
@@ -56,30 +59,26 @@ class Flight < ApplicationRecord
     airplane.ground?
   end
 
-  def airplane_in_air?
-    airplane.in_air?
-  end
+  delegate :in_air?, to: :airplane, prefix: true
+
+  # @return [ActiveRecord::Relation<Flight>]
   def get_flight_before
     Flight.where('airplane_id = ? and departure_time <= ?', airplane.id, arrival_time).order(:arrival_time).limit(1)
   end
 
+  # @return [ActiveRecord::Relation<Flight>]
   def get_flight_after
     Flight.where('airplane_id = ? and departure_time <= ?', airplane.id, arrival_time).order(departure_time: :asc).limit(1)
   end
 
   def self.to_option
-    Flight.all.map{|f| [f.number, f.id]}
+    Flight.all.map { |f| [f.number, f.id] }
   end
 
-  def self.active_flights
-    Flight.all.where('departure_time > ? ',DateTime.now)
-  end
   private
 
   def seats_numbers_valid?
-    if airplane.present?
-      errors.add(:seats, 'too much seats for this airplane') if seats.size > airplane.seats_numbers
-    end
+    errors.add(:seats, 'too much seats for this airplane') if airplane.present? && (seats.size > airplane.seats_numbers)
   end
 
   # create seats

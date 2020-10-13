@@ -45,7 +45,9 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'cancancan'
 gem 'devise'
 
+gem 'aasm'
 gem 'jbuilder'
 gem 'rails-controller-testing'
 gem 'simple_token_authentication', '~> 1.0'
-gem 'aasm'
+
+gem 'eu_central_bank'

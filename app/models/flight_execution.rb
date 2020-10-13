@@ -24,9 +24,8 @@ class FlightExecution < ApplicationRecord
 
   def airplane_to_ground
     arrival_time = DateTime.now
-    self.save
+    save
     airplane.to_ground!
     flight.landing!
   end
-
 end
