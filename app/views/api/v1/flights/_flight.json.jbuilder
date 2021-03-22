@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 json.number flight.number
 json.departure_time flight.departure_time
 json.arrival_time flight.arrival_time

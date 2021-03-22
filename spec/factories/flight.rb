@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # spec/factories.rb
 
 FactoryBot.define do
@@ -5,11 +7,9 @@ FactoryBot.define do
     number { Faker::Lorem.characters(number: 10) }
     departure_time { DateTime.now }
     arrival_time { DateTime.now + rand(600).minutes }
-    departure_airport { create(:airport)}
-    arrival_airport { create(:airport)}
+    departure_airport { create(:airport) }
+    arrival_airport { create(:airport) }
     airplane { create(:airplane) }
-    after(:create) do |flight|
-      flight.reload
-    end
+    after(:create, &:reload)
   end
 end

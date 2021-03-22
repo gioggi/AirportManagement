@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class FlightExecution < ApplicationRecord
   belongs_to :flight
   has_one :airplane, through: :flight
@@ -24,9 +26,8 @@ class FlightExecution < ApplicationRecord
 
   def airplane_to_ground
     arrival_time = DateTime.now
-    self.save
+    save
     airplane.to_ground!
     flight.landing!
   end
-
 end

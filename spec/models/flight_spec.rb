@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Flight, type: :model do
@@ -117,7 +119,6 @@ RSpec.describe Flight, type: :model do
 
   # context 'Valid state:' do
   # end
-
 
   # context 'Valid time_zone:' do
   # end

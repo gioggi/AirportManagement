@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   ActiveAdmin::Devise.config[:controllers][:sessions] = 'admin/sessions'
   devise_for :users, ActiveAdmin::Devise.config
@@ -6,10 +8,10 @@ Rails.application.routes.draw do
   # defaults format: :json do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
-      resources :flights, only: [:index, :show]
+      resources :flights, only: %i[index show]
       devise_scope :user do
-        post "sign_up", to: "registrations#create"
-        post "sign_in", to: "sessions#create"
+        post 'sign_up', to: 'registrations#create'
+        post 'sign_in', to: 'sessions#create'
       end
     end
   end
